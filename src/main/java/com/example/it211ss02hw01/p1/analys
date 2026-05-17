@@ -1,3 +1,8 @@
-Nguyên nhân gốc rễ khiến client không thể phân tích dữ liệu là do phương thức getHotProducts()
-đang trả về chuỗi products.toString() thay vì một danh sách đối tượng Product
--> dữ liệu được trả về không đúng định dạng JSON
+- Trong đoạn code ban đầu, phương thức getHotProducts() trả về products.toString().
+
+- toString() của ArrayList chỉ in ra chuỗi dạng [Product@hashcode, Product@hashcode] hoặc nếu lớp Product override toString() thì cũng chỉ là một chuỗi text, không phải JSON hợp lệ.
+
+- Các ứng dụng client (frontend/mobile) khi gọi API đều mong nhận được dữ liệu ở định dạng JSON để dễ dàng parse.
+Nhưng ở đây, dữ liệu trả về chỉ là chuỗi text, nên client không thể phân tích cú pháp.
+
+-Nguyên nhân gốc rễ: API không trả về danh sách đối tượng Product dưới dạng JSON, mà chỉ trả về chuỗi text.
